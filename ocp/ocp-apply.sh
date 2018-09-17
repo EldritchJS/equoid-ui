@@ -15,8 +15,8 @@ fi
 
 if [ "$LOCAL" = "0" ] ; then
   # Keycloak SSO
-  oc secrets new kc-realm jhipster-realm.json=$KC_REALM_PATH/jhipster-realm.json
-  oc secrets new kc-users jhipster-users-0.json=$KC_REALM_PATH/jhipster-users-0.json
+  oc create secret kc-realm jhipster-realm.json=$KC_REALM_PATH/jhipster-realm.json
+  oc create secret kc-users jhipster-users-0.json=$KC_REALM_PATH/jhipster-users-0.json
   oc process -f $BASE_URL/keycloak/keycloak.yml | oc apply -f -
 
   KC_ROUTE=`oc get routes -l app=equoid-keycloak --no-headers | awk '{print $2}'`
